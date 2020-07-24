@@ -12,7 +12,8 @@ router.get('/', function (request, response) {
 })
 
 router.post('/', function (request, response) {
-	request.body
+	console.log(request.body)
+	console.log(request.query)
 	response.send('Hola desde post')
 })
 
