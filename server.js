@@ -12,8 +12,10 @@ router.get('/', function (request, response) {
 })
 
 router.post('/', function (request, response) {
-	console.log(request.body)
-	console.log(request.query)
+	console.log(request.headers)
+	response.header({
+		'custom-header': 'Hola desde un custom header'
+	})
 	response.send('Hola desde post')
 })
 
