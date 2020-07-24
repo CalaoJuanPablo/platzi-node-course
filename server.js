@@ -1,9 +1,16 @@
 const express = require('express')
+const router = express.Router()
 
 var app = express()
 
-app.use('/', function (request, response) {
-	response.send('Hola')
+app.use(router)
+
+router.get('/', function (request, response) {
+	response.send('Hola desde get')
+})
+
+router.post('/', function (request, response) {
+	response.send('Hola desde post')
 })
 
 app.listen(3000)
