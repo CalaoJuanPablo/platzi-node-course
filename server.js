@@ -1,8 +1,10 @@
 const express = require('express')
+const bodyParser = require('body-parser')
 const router = express.Router()
 
 var app = express()
 
+app.use(bodyParser.json())
 app.use(router)
 
 router.get('/', function (request, response) {
@@ -10,6 +12,7 @@ router.get('/', function (request, response) {
 })
 
 router.post('/', function (request, response) {
+	request.body
 	response.send('Hola desde post')
 })
 
