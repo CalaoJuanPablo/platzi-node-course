@@ -10,19 +10,12 @@ router.get('/', function (request, response) {
 
 router.post('/', function (request, response) {
 	const { body } = request
-	controller.addMessage(body.user, body.message)
-
-	if (request.query.error === 'ok') {
-		networkResponse.error(
-			request,
-			response,
-			500,
-			'Error simulado',
-			'Es solo una simulación de los errores'
+	controller
+		.addMessage(body.user, body.message)
+		.then(fullMessage =>
+			networkResponse.success(request, response, 201, fullMessage)
 		)
-	} else {
-		networkResponse.success(request, response, 201, 'Creado correctamente')
-	}
+		.catch(error => networkResponse.error(request, response, 400, error))
 })
 
 module.exports = router
