@@ -15,11 +15,19 @@ router.get('/', function (request, response) {
 
 router.post('/', function (request, response) {
 	if (request.query.error === 'ok') {
-		networkResponse.error(request, response, 400, 'Error simulado')
+		networkResponse.error(
+			request,
+			response,
+			500,
+			'Error simulado',
+			'Es solo una simulación de los errores'
+		)
 	} else {
 		networkResponse.success(request, response, 201, 'Creado correctamente')
 	}
 })
+
+app.use('/app', express.static('public'))
 
 app.listen(3000)
 
