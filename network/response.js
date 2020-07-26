@@ -1,13 +1,13 @@
-exports.success = function (request, response, status, message) {
+exports.success = function (request, response, status, body) {
 	response.status(status || 200).send({
 		error: '',
-		message
+		body
 	})
 }
 
 exports.error = function (request, response, status, errorMessage) {
 	response.status(status || 500).send({
 		error: errorMessage,
-		message: ''
+		body: ''
 	})
 }
