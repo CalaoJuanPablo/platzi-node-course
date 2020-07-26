@@ -37,4 +37,24 @@ router.post('/', function (request, response) {
 		)
 })
 
+router.patch('/:id', function (request, response) {
+	console.log(request.params.id)
+	const { id } = request.params
+	const { message } = request.body
+
+	controller
+		.updateMessage(id, message)
+		.then(fullMessage =>
+			networkResponse.success(request, response, 200, fullMessage)
+		)
+		.catch(error =>
+			networkResponse.error(
+				request,
+				response,
+				error.status,
+				error.message
+			)
+		)
+})
+
 module.exports = router

@@ -1,5 +1,11 @@
 const store = require('./store')
 
+function getMessages() {
+	return new Promise((resolve, reject) => {
+		resolve(store.list())
+	})
+}
+
 function addMessage(user, message) {
 	return new Promise((resolve, reject) => {
 		if (!user || !message) {
@@ -19,13 +25,22 @@ function addMessage(user, message) {
 	})
 }
 
-function getMessages() {
+function updateMessage(id, message) {
 	return new Promise((resolve, reject) => {
-		resolve(store.list())
+		if (!id || !message) {
+			console.error(
+				'[message controller] updateMessage: No hay id de usuario y/o mensaje'
+			)
+			reject({ status: 400, message: 'Los datos son incorrectos' })
+		}
+
+		const result = store.updateText(id, message)
+		resolve(result)
 	})
 }
 
 module.exports = {
 	addMessage,
-	getMessages
+	getMessages,
+	updateMessage
 }
