@@ -6,6 +6,12 @@ function getMessages() {
 	})
 }
 
+function getMessagesFromUser(username) {
+	return new Promise((resolve, reject) => {
+		resolve(store.list(username))
+	})
+}
+
 function addMessage(user, message) {
 	return new Promise((resolve, reject) => {
 		if (!user || !message) {
@@ -42,5 +48,6 @@ function updateMessage(id, message) {
 module.exports = {
 	addMessage,
 	getMessages,
-	updateMessage
+	updateMessage,
+	getMessagesFromUser
 }

@@ -20,6 +20,24 @@ router.get('/', function (request, response) {
 		)
 })
 
+router.get('/user/:username', function (request, response) {
+	const { username } = request.params
+
+	controller
+		.getMessagesFromUser(username)
+		.then(messagesList =>
+			networkResponse.success(request, response, 200, messagesList)
+		)
+		.catch(error =>
+			networkResponse.error(
+				request,
+				response,
+				error.status,
+				error.message
+			)
+		)
+})
+
 router.post('/', function (request, response) {
 	const { body } = request
 	controller

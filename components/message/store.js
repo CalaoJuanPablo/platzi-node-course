@@ -11,15 +11,20 @@ db.connect(process.env.DB_URI, {
 })
 console.log('[DB] Conectada con éxito')
 
-const list = []
-
 function addMessage(message) {
 	const myMessage = new Model(message)
 	myMessage.save()
 }
 
-async function getMessagesList() {
-	const messages = await model.find()
+async function getMessagesList(username) {
+	if (!username) {
+		const messages = await model.find()
+		return messages
+	}
+
+	const messages = await model.findOne({
+		user: username
+	})
 	return messages
 }
 
