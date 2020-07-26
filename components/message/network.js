@@ -75,4 +75,26 @@ router.patch('/:id', function (request, response) {
 		)
 })
 
+router.delete('/:id', function (request, response) {
+	const { id } = request.params
+	controller
+		.deleteMessage(id)
+		.then(() =>
+			networkResponse.success(
+				request,
+				response,
+				200,
+				`Mensaje &{id} eliminado`
+			)
+		)
+		.catch(error =>
+			networkResponse.error(
+				request,
+				response,
+				error.status,
+				error.message
+			)
+		)
+})
+
 module.exports = router

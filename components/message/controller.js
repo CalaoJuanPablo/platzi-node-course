@@ -45,9 +45,23 @@ function updateMessage(id, message) {
 	})
 }
 
+function deleteMessage(id) {
+	return new Promise((resolve, reject) => {
+		if (!id) {
+			console.error(
+				'[message controller] deleteMessage: No hay id de usuario y/o mensaje'
+			)
+			reject({ status: 400, message: 'Los datos son incorrectos' })
+		}
+		const result = store.remove(id)
+		resolve(result)
+	})
+}
+
 module.exports = {
 	addMessage,
 	getMessages,
 	updateMessage,
-	getMessagesFromUser
+	getMessagesFromUser,
+	deleteMessage
 }
