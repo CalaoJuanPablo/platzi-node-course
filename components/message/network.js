@@ -5,7 +5,19 @@ const controller = require('./controller')
 const router = express.Router()
 
 router.get('/', function (request, response) {
-	networkResponse.success(request, response, 200, 'Lista de mensajes')
+	controller
+		.getMessages()
+		.then(messagesList =>
+			networkResponse.success(request, response, 200, messagesList)
+		)
+		.catch(error =>
+			networkResponse.error(
+				request,
+				response,
+				error.status,
+				error.message
+			)
+		)
 })
 
 router.post('/', function (request, response) {
@@ -15,7 +27,14 @@ router.post('/', function (request, response) {
 		.then(fullMessage =>
 			networkResponse.success(request, response, 201, fullMessage)
 		)
-		.catch(error => networkResponse.error(request, response, 400, error))
+		.catch(error =>
+			networkResponse.error(
+				request,
+				response,
+				error.status,
+				error.message
+			)
+		)
 })
 
 module.exports = router
