@@ -1,5 +1,6 @@
 const express = require('express')
 const networkResponse = require('../../network/response')
+const controller = require('./controller')
 
 const router = express.Router()
 
@@ -8,6 +9,9 @@ router.get('/', function (request, response) {
 })
 
 router.post('/', function (request, response) {
+	const { body } = request
+	controller.addMessage(body.user, body.message)
+
 	if (request.query.error === 'ok') {
 		networkResponse.error(
 			request,
