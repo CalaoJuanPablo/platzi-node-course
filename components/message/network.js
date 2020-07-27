@@ -1,7 +1,6 @@
 const express = require('express')
 const networkResponse = require('../../network/response')
 const controller = require('./controller')
-
 const router = express.Router()
 
 router.get('/', function (request, response) {
