@@ -13,6 +13,11 @@ function addUser(name) {
 	return store.add(user)
 }
 
+function getUser(username) {
+	return store.get(username)
+}
+
 module.exports = {
-	addUser
+	addUser,
+	getUser
 }

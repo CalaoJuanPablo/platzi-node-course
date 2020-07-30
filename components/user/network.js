@@ -18,4 +18,19 @@ router.post('/', function (request, response) {
 		)
 })
 
+router.get('/:username', function (request, response) {
+	const { username } = request.params
+	controller
+		.getUser(username)
+		.then(data => networkResponse.success(request, response, 200, data))
+		.catch(error => networkResponse.error(request, response, 500, error))
+})
+
+router.get('/', function (request, response) {
+	controller
+		.getUser()
+		.then(data => networkResponse.success(request, response, 200, data))
+		.catch(error => networkResponse.error(request, response, 500, error))
+})
+
 module.exports = router
